@@ -1,6 +1,6 @@
 #pragma once
 #include "AIModule/AIController.hpp"
-#include "CollisionModule/CollisionComponent.hpp"
+#include "CollisionModule/EnemyCollisionComponent.hpp"
 #include "EventSystem/EventTypes.hpp"
 #include "GameModule/Obstacle.hpp"
 #include "SpriteModule/Animation.hpp"
@@ -8,13 +8,19 @@
 #include <vector>
 
 class AIController;
-class CollisionComponent;
+class EnemyCollisionComponent;
 
 enum class EnemyType
 {
     Basic,
     Medium,
     Hard
+};
+
+enum class Direction
+{
+    Left,
+    Right
 };
 
 class EnemyBase : public CollisionObject
@@ -32,9 +38,7 @@ public:
 
     void initializeDeath();
 
-    void playLeftAnimation();
-
-    void playRightAnimation();
+    void playAnimation(Direction direction);
 
     bool isDead() const;
 
@@ -100,7 +104,7 @@ protected:
     bool isEnemyDead        = false;
     bool isDeathInitialized = false;
 
-    std::unique_ptr<CollisionComponent> collisionBox;
+    std::unique_ptr<EnemyCollisionComponent> collisionBox;
     std::unique_ptr<AIController>       ai;
 
     std::vector<sf::Vector2i> m_patrolligPoints;

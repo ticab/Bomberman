@@ -252,7 +252,7 @@ void GameModule::terminate()
 
 void GameModule::setCurrentScreen(const Screens& newScreen)
 {
-    Modules::Sounds->stopMusic();
+    Modules::Sounds->pauseMusic();
     currentScreen = newScreen;
     timeCounter   = 0.0f;
 }
@@ -287,12 +287,7 @@ void GameModule::checkTimeCounter()
             }
             if (gameTime < 0)
             {
-                (std::dynamic_pointer_cast<GameOver>(screens[Screens::GAME_OVER]))->setScore(gameStats->getPoints());
-                // Changing screen to game over, for now here
-                setCurrentScreen(Screens::GAME_OVER);
-                Modules::Sounds->playMusic(static_cast<int32_t>(AllMusic::GameOver));
-
-                Modules::Events->emit(GameModule::GAME_TIMER_FINISHED, nullptr);
+                playerDied();
             }
             break;
         case Screens::STAGE:

@@ -38,7 +38,11 @@ MainMenu::MainMenu(sf::RenderWindow* renderWindow, const std::string& font, cons
             }
             else if (element.first == Buttons::OPTIONS)
             {
-                button->onRelease = []() { Modules::Game->setCurrentScreen(Screens::OPTIONS); };
+                button->onRelease = []() 
+                { 
+                    Modules::Game->setCurrentScreen(Screens::OPTIONS); 
+                    Modules::Sounds->continueMusic();
+                };
             }
         }
     }

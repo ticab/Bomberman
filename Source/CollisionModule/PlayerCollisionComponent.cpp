@@ -15,6 +15,7 @@ bool PlayerCollisionComponent::BeginOverlapHandler(void* other)
         if (auto enemy = dynamic_cast<EnemyBase*>(otherComponent->getObjectParent()))
         {
             player->die();
+            return true;
         }
         else if (dynamic_cast<Obstacle*>(otherComponent->getObjectParent()))
         {

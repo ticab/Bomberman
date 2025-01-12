@@ -192,6 +192,9 @@ void PlayerCharacter::handleBoosterOverlap(Booster* booster)
 
 void PlayerCharacter::die()
 {
+    if (m_died == true)
+        return;
+
     if (getIsInvincible())
         return;
 

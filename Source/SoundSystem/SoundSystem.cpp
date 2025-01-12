@@ -235,8 +235,10 @@ void SoundSystem::playMusic(int32_t musicID)
     if (it != musicTracks.end())
     {
         // check if it is currently playing
-        if (it->second == currentMusic && isMusicPlaying())
+        if (it->second == currentMusic)
         {
+            if (!isMusicPlaying())
+                currentMusic->play();
             return;
         }
         stopMusic();
@@ -269,7 +271,14 @@ void SoundSystem::pauseMusic()
     if (currentMusic)
     {
         currentMusic->pause();
-        LOG("Paused music");
+    }
+}
+
+void SoundSystem::continueMusic()
+{
+    if (currentMusic && !isMusicPlaying())
+    {
+        currentMusic->play();
     }
 }
 

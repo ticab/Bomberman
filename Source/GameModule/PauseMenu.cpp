@@ -41,7 +41,11 @@ PauseMenu::PauseMenu(sf::RenderWindow* renderWindow, const std::string& pauseFon
             }
             else if (element.first == Buttons::OPTIONS)
             {
-                button->onRelease = []() { Modules::Game->setCurrentScreen(Screens::OPTIONS); };
+                button->onRelease = []() 
+                { 
+                    Modules::Game->setCurrentScreen(Screens::OPTIONS);   
+                    Modules::Sounds->continueMusic();
+                };
             }
         }
     }

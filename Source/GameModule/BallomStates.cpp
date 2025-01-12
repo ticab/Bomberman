@@ -8,7 +8,7 @@
 void LookRightState::Enter(AIController* ai)
 {
     auto enemy = static_cast<EnemyBase*>(ai->getParent());
-    enemy->playRightAnimation();
+    enemy->playAnimation(Direction::Right);
     startTime = std::chrono::steady_clock::now();
     ai->setIsPlayerInRange(false);
 }
@@ -42,7 +42,7 @@ void LookRightState::Exit(AIController*)
 void LookLeftState::Enter(AIController* ai)
 {
     auto enemy = static_cast<EnemyBase*>(ai->getParent());
-    enemy->playLeftAnimation();
+    enemy->playAnimation(Direction::Left);
     startTime = std::chrono::steady_clock::now();
     ai->setIsPlayerInRange(false);
 }

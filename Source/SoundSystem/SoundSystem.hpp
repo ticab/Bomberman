@@ -42,6 +42,8 @@ public:
 
     void pauseMusic();
 
+    void continueMusic();
+
     bool isMusicPlaying() const;
 
     void terminate() override;

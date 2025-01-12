@@ -33,7 +33,7 @@ void FollowState::Enter(AIController* ai)
     sf::Vector2f collisionCenter = parent->getCollisionBox().getCenter();
     sf::Vector2i parentPosition2 = static_cast<sf::Vector2i>(collisionCenter) / TILE_SIZE;
 
-    parent->playLeftAnimation();
+    parent->playAnimation(Direction::Left);
     parent->m_navModule->algorithm->navigate({1, 7});
     parent->m_navModule->algorithm->moveTo({parentPosition2.y, parentPosition2.x}, m_moveTo);
     m_dir = {static_cast<float>(m_moveTo.x - parentPosition2.y), static_cast<float>(m_moveTo.y - parentPosition2.x)};
@@ -93,15 +93,15 @@ void FollowState::switchAnimation(Dahl* parent)
 {
     if (FloatUtils::areVectorsEqual(m_dir, RIGHT))
     {
-        parent->playRightAnimation();
+        parent->playAnimation(Direction::Right);
     }
     else if (FloatUtils::areVectorsEqual(m_dir, LEFT) || !m_d(m_gen))
     {
-        parent->playLeftAnimation();
+        parent->playAnimation(Direction::Left);
     }
     else
     {
-        parent->playRightAnimation();
+        parent->playAnimation(Direction::Right);
     }
 }
 
@@ -139,7 +139,7 @@ void StandbyState::Update(AIController* ai)
             }
         }
 
-        d(gen) ? parent->playLeftAnimation() : parent->playRightAnimation();
+        d(gen) ? parent->playAnimation(Direction::Left) : parent->playAnimation(Direction::Right);
 
         startTime = std::chrono::steady_clock::now();
     }

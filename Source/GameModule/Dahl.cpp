@@ -14,7 +14,7 @@ void Dahl::initialize(EnemyType type, sf::Vector2f spawnPosition)
     m_deatAnimationId    = Modules::Sprite->createAnimation("../../Data/Config/DahlDeathAnimation.ini");
     m_currentAnimationId = m_deatAnimationId;
 
-    collisionBox = std::make_unique<CollisionComponent>();
+    collisionBox = std::make_unique<EnemyCollisionComponent>();
     ai           = std::make_unique<AIController>();
     collisionBox->setParent(this);
     collisionBox->setObjectParent(this);

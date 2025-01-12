@@ -45,24 +45,14 @@ void EnemyBase::initializeDeath()
     }
 }
 
-void EnemyBase::playLeftAnimation()
-{
-
-    if (!Modules::Sprite->getAnimation(m_deatAnimationId)->isPlaying())
-    {
-        Modules::Sprite->getAnimation(m_currentAnimationId)->Stop();
-        m_currentAnimationId = m_leftAnimationId;
-        Modules::Sprite->getAnimation(m_currentAnimationId)->Play();
-        Modules::Sprite->getAnimation(m_currentAnimationId)->setPosition(position);
-    }
-}
-
-void EnemyBase::playRightAnimation()
+void EnemyBase::playAnimation(Direction direction)
 {
     if (!Modules::Sprite->getAnimation(m_deatAnimationId)->isPlaying())
     {
         Modules::Sprite->getAnimation(m_currentAnimationId)->Stop();
-        m_currentAnimationId = m_rightAnimationId;
+
+        m_currentAnimationId = (direction == Direction::Right) ? m_rightAnimationId : m_leftAnimationId;
+
         Modules::Sprite->getAnimation(m_currentAnimationId)->Play();
         Modules::Sprite->getAnimation(m_currentAnimationId)->setPosition(position);
     }

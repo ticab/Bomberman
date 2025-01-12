@@ -18,7 +18,7 @@ void Onli::initialize(EnemyType type, sf::Vector2f spawnPosition)
     m_deatAnimationId    = Modules::Sprite->createAnimation("../../Data/Config/OnliDeathAnimation.ini");
     m_currentAnimationId = m_deatAnimationId;
 
-    collisionBox = std::make_unique<CollisionComponent>();
+    collisionBox = std::make_unique<EnemyCollisionComponent>();
     ai           = std::make_unique<AIController>();
     collisionBox->setParent(this);
     collisionBox->setObjectParent(this);
@@ -32,4 +32,9 @@ void Onli::initialize(EnemyType type, sf::Vector2f spawnPosition)
 
     ai->fsm->AddTransition(patrollingState, std::make_shared<PatrollingToRestTransition>(restState));
     ai->fsm->AddTransition(restState, std::make_shared<RestToPatrollingTransition>(patrollingState));
+}
+
+void Onli::handleObstacleOverlap()
+{
+    patrollingState->handleObstacleOverlap(this);
 }

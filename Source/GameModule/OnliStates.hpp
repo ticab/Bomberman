@@ -41,6 +41,8 @@ public:
         return m_name;
     }
 
+    void handleObstacleOverlap(void* parent);
+
 private:
     const std::string                     m_name = "PatrollingState";
     std::chrono::steady_clock::time_point startTime;
